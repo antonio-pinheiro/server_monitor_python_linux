@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+{% block content %}
+    
+    <a class="btn btn-primary" href="{{ url_for('new') }}">Register New Server</a>
+    <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>Server Name</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for server in servers %}
+                <tr>
+                    <td>{{ server.name }}</td>
+                    <td>{{ server.category }}</td>
+                    <td>
+                        <a href="{{ url_for('system_configure', id=server.id) }}">Manage - </a>
+                        <a href="{{ url_for('system_monitoring', id=server.id) }}">Monitor - </a>
+                        <a href="{{ url_for('edit', id=server.id) }}">Edit - </a>
+                        <a href="{{ url_for('delete', id=server.id) }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

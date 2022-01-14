@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+{% block content %}
+      <form action="{{ url_for('update') }}" method="post" enctype="multipart/form-data">
+        {% if server_pic != None %}
+        <figure class="thumb col-md-4">
+            <img class="img-responsive" src="{{ url_for('image', file_name=server_pic) }}">
+            <figcaption>
+                <label class="fileContainer">
+                    Change Image
+                    <input type="file" name="file" accept=".jpg">
+                </label>
+            </figcaption>
+        </figure>
+
+        {% endif %}
+        <input type="hidden" name="server_picture" value="{{ server_pic }}">
+        <input type="hidden" name="id" value="{{ server.id }}">
+        <fieldset>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ server.name }}">
+          </div>
+          <div class="form-group">
+            <label for="categoria">Category</label>
+            <input type="text" id="category" name="category" class="form-control" value="{{ server.category }}">
+          </div>
+          <div class="form-group">
+            <label for="ip_address">Ip Adress</label>
+            <input type="text" id="ip_address" name="ip_address" class="form-control" value="{{ server.ip_address }}">
+          </div>
+          <button type="submit" class="btn btn-primary btn-salvar">Save</button>
+          <a class="btn btn-danger" href="{{ url_for('index') }}">Back</a>
+        </fieldset>
+      </form>
+{% endblock %}

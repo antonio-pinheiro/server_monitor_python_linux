@@ -1,0 +1,39 @@
+{% extends "template.html" %}
+{% block content %}
+      <form action="{{ url_for('update') }}" method="post" enctype="multipart/form-data">
+        {% if capa_jogo != None %}
+        <figure class="thumb col-md-4">
+            <img class="img-responsive" src="{{ url_for('image', file_name=capa_jogo) }}">
+            <figcaption>
+                <label class="fileContainer">
+                    
+                    <input type="file" name="file" accept=".jpg">
+                </label>
+            </figcaption>
+        </figure>
+
+        
+        {% endif %}
+        <input type="hidden" name="capa_do_jogo" value="{{ capa_jogo }}">
+        <input type="hidden" name="id" value="{{ server.id }}">
+        <fieldset>
+          <div class="form-group">
+            <label for="name">System to Manage and Configure</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ server.name }}">
+          </div>
+          <div class="form-group">
+            <label for="categoria">Category</label>
+            <input type="text" id="category" name="category" class="form-control" value="{{ server.category }}">
+          </div>
+          <div class="form-group">
+            <label for="ip_address">Ip Address</label>
+            <input type="text" id="ip_address" name="ip_address" class="form-control" value="{{ server.ip_address }}">
+          </div>
+          <a class="btn btn-primary" href="{{ url_for('new') }}">Samba Configure</a>
+          <a class="btn btn-primary" href="{{ url_for('new') }}">MySQL Configure</a>
+          <a class="btn btn-primary" href="{{ url_for('new') }}">SSH Configure</a>
+          <a class="btn btn-primary" href="{{ url_for('new') }}">DNS Configure</a>
+          <a class="btn btn-danger" href="{{ url_for('index') }}">Back</a>
+        </fieldset>
+      </form>
+{% endblock %}

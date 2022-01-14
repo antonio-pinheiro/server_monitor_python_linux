@@ -1,0 +1,37 @@
+#Playbook
+- hosts: all
+  tasks:
+    - name: Install utility packages common to all hosts
+      become: yes
+      apt:
+        name:
+          - php7.4
+          - apache2
+          - build-essential
+          - gcc
+          - make
+          - libapache2-mod-php7.4
+          - php7.4-gd
+          - libssh2-1
+          - php-pear 
+          - php-dev 
+          - libmcrypt-dev
+          - mariadb-server
+          - python3-mysqldb
+          - php7.4-mysql
+        state: latest
+
+    - name: 'Create MySQL DB'
+      mysql_db:
+        name: server_monitor_db
+        state: present
+      become: yes
+
+    - name: 'create MySQl User'
+      mysql_user:
+        login_user: root
+        login_password: '123456'
+        name: antonio
+        password: 123@123
+        priv: 'server_monitor.*:ALL'
+        state: present

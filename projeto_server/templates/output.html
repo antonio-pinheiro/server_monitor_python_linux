@@ -1,0 +1,31 @@
+
+{% extends "template.html" %}
+{% block content %}
+      <form action="{{ url_for('update') }}" method="post" enctype="multipart/form-data">
+        {% if capa_jogo != None %}
+        <figure class="thumb col-md-4">
+            <img class="img-responsive" src="{{ url_for('image', file_name=capa_jogo) }}">
+            <figcaption>
+                <label class="fileContainer">
+                    
+                    <input type="file" name="file" accept=".jpg">
+                </label>
+            </figcaption>
+        </figure>
+        
+        {% endif %}
+
+        <input type="hidden" name="capa_do_jogo" value="{{ capa_jogo }}">
+       
+        <fieldset>
+          <div class="form-group">
+            <label for="name">CPU Load</label>
+            <input type="text" id="name" name="name" class="form-control" value="Last 1 minute {{ cpl[0] }}">
+            <input type="text" id="name" name="name" class="form-control" value="Last 5 minutes {{ cpl[1] }}">
+            <input type="text" id="name" name="name" class="form-control" value="Last 15 minutes {{ cpl[2] }}">
+          </div>
+          </div>
+          <a class="btn btn-danger" href="{{ url_for('index') }}">Back</a>
+        </fieldset>
+      </form>
+{% endblock %}
